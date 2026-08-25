@@ -154,7 +154,7 @@
   <!-- LEFT: FORM -->
   <div>
     <div class="warn-banner">
-      ⚠ Nội dung căn cứ pháp lý (Điều/Khoản/Điểm của Quy định) trong mục 5 hiện là <b>dữ liệu mẫu để nhập/sửa</b>.
+      ⚠ Nội dung căn cứ pháp lý (Điều/Khoản/Điểm của Quyết định) trong mục 5 hiện là <b>dữ liệu mẫu để nhập/sửa</b>.
       Vào <b>⚙ Danh mục &amp; Cài đặt → Căn cứ pháp lý</b> để nhập đúng nội dung văn bản anh đang áp dụng, sau đó bấm
       <b>Lưu cấu hình</b> để chương trình ghi nhớ cho các lần sau (vì đây là file chạy offline, không tự lưu vào máy).
     </div>
@@ -511,7 +511,7 @@ function buildCanCuText(){
   if(form.canCuChon.diemKy) parts.push(`điểm ${form.canCuChon.diemKy}`);
   parts.push(`khoản ${form.canCuChon.khoanSo}`);
   parts.push(dieuLabel);
-  parts.push(`Quy định số ${state.soQuyDinh} của ${state.donViBanHanh}`);
+  parts.push(`Quyết định số ${state.soQuyDinh} của ${state.donViBanHanh}`);
   return parts.join(', ');
 }
 
@@ -706,7 +706,7 @@ function removeListItem(listKey, idx){
 function renderCanCuEditor(){
   let html = `<div class="settings-section">
     <h4>Thông tin văn bản căn cứ</h4>
-    <label style="margin-top:0;">Số quy định</label>
+    <label style="margin-top:0;">Số Quyết định</label>
     <input type="text" value="${escapeHtml(state.soQuyDinh)}" oninput="state.soQuyDinh=this.value; renderCanCuSelectedBox(); renderPreview();">
     <label>Đơn vị / người ban hành</label>
     <input type="text" value="${escapeHtml(state.donViBanHanh)}" oninput="state.donViBanHanh=this.value; renderCanCuSelectedBox(); renderPreview();">
