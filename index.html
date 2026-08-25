@@ -100,11 +100,16 @@
     background:#fff; border:1px solid #ccc; box-shadow:0 4px 14px rgba(0,0,0,.08); padding:40px 48px; font-family:"Times New Roman",serif;
     font-size:14px; line-height:1.5; color:#111; min-height:600px;
   }
-  .doc-top{ display:flex; justify-content:space-between; margin-bottom:6px; }
-  .qh{ text-align:center; font-weight:bold; }
+  .mau-so{ text-align:right; font-style:italic; font-size:13px; margin-bottom:6px; }
+  .doc-top{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px; gap:10px;}
+  .doc-top .coquan-block{ text-align:center; width:46%; font-size:13.5px; }
+  .doc-top .coquan-block .thường{ font-weight:400; }
+  .doc-top .coquan-block .in-dam{ font-weight:bold; }
+  .qh{ text-align:center; font-weight:bold; width:46%; }
   .qh .line2{ text-decoration:underline; }
   .doc-place{ text-align:right; font-style:italic; margin-top:2px; }
-  .doc-title{ text-align:center; font-weight:bold; font-size:16px; margin:22px 0 18px; text-transform:uppercase; letter-spacing:.5px;}
+  .doc-title{ text-align:center; font-weight:bold; font-size:16px; margin:22px 0 4px; text-transform:uppercase; letter-spacing:.5px; line-height:1.3;}
+  .doc-kinhgui{ margin:18px 0 14px; font-style:italic; }
   .doc-field{ margin:9px 0; }
   .doc-field b{ }
   .doc-sign{ display:flex; justify-content:space-between; margin-top:34px; text-align:center; font-size:13.5px;}
@@ -170,12 +175,12 @@
     </div>
 
     <div class="panel">
-      <h2><span class="num">1</span> Tên gọi, trích yếu nội dung văn bản</h2>
+      <h2><span class="num">1</span> Tên văn bản</h2>
       <input type="text" id="tenVanBan" placeholder="Nhập tên văn bản..." oninput="renderPreview()">
     </div>
 
     <div class="panel">
-      <h2><span class="num">2</span> Đơn vị chủ trì xây dựng văn bản</h2>
+      <h2><span class="num">2</span> Cơ quan xác định</h2>
       <div class="searchbox">
         <input type="text" id="coQuanInput" placeholder="Tìm hoặc nhập cơ quan..." autocomplete="off"
           oninput="showDropdown('coQuan')" onfocus="showDropdown('coQuan')">
@@ -188,7 +193,7 @@
     </div>
 
     <div class="panel">
-      <h2><span class="num">3</span> Họ tên cán bộ soạn thảo văn bản</h2>
+      <h2><span class="num">3</span> Tên người đề xuất</h2>
       <div class="searchbox">
         <input type="text" id="deXuatInput" placeholder="Tìm hoặc nhập tên người đề xuất..." autocomplete="off"
           oninput="showDropdown('deXuat')" onfocus="showDropdown('deXuat')">
@@ -209,7 +214,7 @@
     </div>
 
     <div class="panel">
-      <h2><span class="num">5</span> Căn cứ đề xuất độ mật <span style="font-weight:400;font-size:11.5px;color:var(--muted)">(chỉ chọn đúng 1 khoản/điểm)</span></h2>
+      <h2><span class="num">5</span> Căn cứ xác định <span style="font-weight:400;font-size:11.5px;color:var(--muted)">(chỉ chọn đúng 1 khoản/điểm)</span></h2>
       <div class="tabs" id="dieuTabs"></div>
       <input type="text" class="khoan-search" id="canCuSearch" placeholder="🔍 Tìm nội dung khoản/điểm..." oninput="renderCanCuList()">
       <div class="khoan-list" id="khoanList"></div>
@@ -217,7 +222,7 @@
     </div>
 
     <div class="panel">
-      <h2><span class="num">6</span> Thời hạn bảo vệ bí mật nhà nước</h2>
+      <h2><span class="num">6</span> Thời hạn bảo vệ</h2>
       <div class="field-static" id="thoiHanBox">Chọn độ mật để tự động tính thời hạn.</div>
       <div class="hint">Tự động tính = ngày lập phiếu + (10 năm nếu MẬT / 20 năm nếu TỐI MẬT). Không sửa thủ công.</div>
     </div>
@@ -235,7 +240,7 @@
     </div>
 
     <div class="panel">
-      <h2><span class="num">8</span> Số lượng bản phát hành</h2>
+      <h2><span class="num">8</span> Số bản</h2>
       <input type="number" id="soBan" min="1" value="1" oninput="renderPreview()" style="max-width:140px;">
     </div>
 
@@ -526,22 +531,30 @@ function renderPreview(){
   const canCuText = buildCanCuText();
   const sheet = document.getElementById('docSheet');
   sheet.innerHTML = `
-    <div class="qh">
-      <div class="line2" style="display:inline-block;margin-top:2px;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
-      <div>Độc lập - Tự do - Hạnh phúc</div>
+    <div class="mau-so">Mẫu số 1</div>
+    <div class="doc-top">
+      <div class="coquan-block">
+        <div>CÔNG AN TỈNH THÁI NGUYÊN</div>
+        <div class="in-dam">CÔNG AN XÃ BÌNH YÊN</div>
+      </div>
+      <div class="qh">
+        <div class="line2" style="display:inline-block;margin-top:2px;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+        <div>Độc lập - Tự do - Hạnh phúc</div>
+      </div>
     </div>
     <div class="doc-place">${diaDanh ? escapeHtml(diaDanh) : '.....................'}, ngày ${form.ngayLap?fmtDateVN(form.ngayLap).split('/')[0]:'…'} tháng ${form.ngayLap?fmtDateVN(form.ngayLap).split('/')[1]:'…'} năm ${form.ngayLap?fmtDateVN(form.ngayLap).split('/')[2]:'…'}</div>
 
-    <div class="doc-title">Phiếu trình duyệt</div>
-    <div class="doc-title">và xác định độ mật của văn bản</div>
-    <div class="doc-field"><b>1. Tên gọi, trích yếu nội dung văn bản:</b> ${form.tenVanBan ? escapeHtml(form.tenVanBan) : '<span class="empty-note">(chưa nhập)</span>'}</div>
-    <div class="doc-field"><b>2. Đơn vị chủ trì xây dựng văn bản:</b> ${form.coQuan ? escapeHtml(form.coQuan) : '<span class="empty-note">(chưa chọn)</span>'}</div>
-    <div class="doc-field"><b>3. Họ tên cán bộ soạn thảo văn bản:</b> ${form.nguoiDeXuat ? escapeHtml(form.nguoiDeXuat) : '<span class="empty-note">(chưa chọn)</span>'}</div>
-    <div class="doc-field"><b>4. Đề xuất độ mật:</b> ${form.doMat ? escapeHtml(form.doMat) : '<span class="empty-note">(chưa chọn)</span>'}</div>
-    <div class="doc-field"><b>5. Căn cứ đề xuất độ mật:</b> ${canCuText ? ('Căn cứ ' + escapeHtml(canCuText)) : '<span class="empty-note">(chưa chọn)</span>'}</div>
-    <div class="doc-field"><b>6. Thời hạn bảo vệ bí mật nhà nước:</b> ${thoiHan ? fmtDateVN(thoiHan) : '<span class="empty-note">(tự động tính sau khi chọn độ mật)</span>'}</div>
+    <div class="doc-title">PHIẾU TRÌNH DUYỆT<br>VÀ XÁC ĐỊNH ĐỘ MẬT CỦA VĂN BẢN</div>
+    <div class="doc-kinhgui">Kính gửi: Lãnh đạo Công an xã Bình Yên</div>
+
+    <div class="doc-field"><b>1. Tên văn bản:</b> ${form.tenVanBan ? escapeHtml(form.tenVanBan) : '<span class="empty-note">(chưa nhập)</span>'}</div>
+    <div class="doc-field"><b>2. Cơ quan xác định:</b> ${form.coQuan ? escapeHtml(form.coQuan) : '<span class="empty-note">(chưa chọn)</span>'}</div>
+    <div class="doc-field"><b>3. Tên người đề xuất:</b> ${form.nguoiDeXuat ? escapeHtml(form.nguoiDeXuat) : '<span class="empty-note">(chưa chọn)</span>'}</div>
+    <div class="doc-field"><b>4. Độ mật:</b> ${form.doMat ? escapeHtml(form.doMat) : '<span class="empty-note">(chưa chọn)</span>'}</div>
+    <div class="doc-field"><b>5. Căn cứ xác định:</b> ${canCuText ? ('Căn cứ ' + escapeHtml(canCuText)) : '<span class="empty-note">(chưa chọn)</span>'}</div>
+    <div class="doc-field"><b>6. Thời hạn bảo vệ:</b> ${thoiHan ? fmtDateVN(thoiHan) : '<span class="empty-note">(tự động tính sau khi chọn độ mật)</span>'}</div>
     <div class="doc-field"><b>7. Nơi nhận:</b> ${form.noiNhanChon.length ? escapeHtml(form.noiNhanChon.join('; ')) : '<span class="empty-note">(chưa chọn)</span>'}</div>
-    <div class="doc-field"><b>8. Số lượng bản phát hành:</b> ${document.getElementById('soBan') ? escapeHtml(document.getElementById('soBan').value||'') : ''}</div>
+    <div class="doc-field"><b>8. Số bản:</b> ${document.getElementById('soBan') ? escapeHtml(document.getElementById('soBan').value||'') : ''}</div>
 
     <div class="doc-sign">
       <div class="col">
@@ -562,23 +575,25 @@ function copyPreviewText(){
   const thoiHan = computeThoiHan();
   const diaDanh = document.getElementById('diaDanh').value.trim() || '.....................';
   const text = [
-    "CÔNG AN TỈNH THÁI NGUYÊN               CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM",
-    "  CÔNG AN XÃ BÌNH YÊN                     Độc lập - Tự do - Hạnh phúc",
+    "Mẫu số 1",
+    "CÔNG AN TỈNH THÁI NGUYÊN                 CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM",
+    "CÔNG AN XÃ BÌNH YÊN                          Độc lập - Tự do - Hạnh phúc",
     "",
     `${diaDanh}, ngày ${form.ngayLap?fmtDateVN(form.ngayLap).split('/')[0]:'…'} tháng ${form.ngayLap?fmtDateVN(form.ngayLap).split('/')[1]:'…'} năm ${form.ngayLap?fmtDateVN(form.ngayLap).split('/')[2]:'…'}`,
     "",
     "PHIẾU TRÌNH DUYỆT",
-    "XÁC ĐỊNH ĐỘ MẬT CỦA VĂN BẢN"
-    "Kính gửi: Lãnh đạo Công an xã Bình Yên"
+    "VÀ XÁC ĐỊNH ĐỘ MẬT CỦA VĂN BẢN",
     "",
-    `1. Tên gọi, trích yếu nội dung văn bản: ${form.tenVanBan||''}`,
-    `2. Đơn vị chủ trì soạn thảo văn bản: ${form.coQuan||''}`,
-    `3. Họ tên cán bộ soạn thảo văn bản: ${form.nguoiDeXuat||''}`,
-    `4. Đề xuất độ mật: ${form.doMat||''}`,
-    `5. Căn cứ đề xuất độ mật: ${buildCanCuText() ? 'Căn cứ '+buildCanCuText() : ''}`,
-    `6. Thời hạn bảo vệ bí mật nhà nước: ${thoiHan?fmtDateVN(thoiHan):''}`,
+    "Kính gửi: Lãnh đạo Công an xã Bình Yên",
+    "",
+    `1. Tên văn bản: ${form.tenVanBan||''}`,
+    `2. Cơ quan xác định: ${form.coQuan||''}`,
+    `3. Tên người đề xuất: ${form.nguoiDeXuat||''}`,
+    `4. Độ mật: ${form.doMat||''}`,
+    `5. Căn cứ xác định: ${buildCanCuText() ? 'Căn cứ '+buildCanCuText() : ''}`,
+    `6. Thời hạn bảo vệ: ${thoiHan?fmtDateVN(thoiHan):''}`,
     `7. Nơi nhận: ${form.noiNhanChon.join('; ')}`,
-    `8. Số lượng bản phát hành: ${document.getElementById('soBan').value||''}`,
+    `8. Số bản: ${document.getElementById('soBan').value||''}`,
     "",
     `Người phê duyệt: ${form.nguoiPheDuyet||''}`,
     `Người đề xuất: ${form.nguoiDeXuat||''}`,
@@ -604,17 +619,25 @@ function exportWord(){
   <style>
     body{font-family:"Times New Roman",serif; font-size:14pt;}
     .center{text-align:center;} .right{text-align:right;font-style:italic;}
-    .bold{font-weight:bold;} .title{font-weight:bold;font-size:16pt;text-align:center;text-transform:uppercase;margin:18pt 0 14pt;}
+    .bold{font-weight:bold;} .title{font-weight:bold;font-size:16pt;text-align:center;text-transform:uppercase;margin:18pt 0 4pt;}
     .underline{text-decoration:underline;}
+    .mauso{ text-align:right; font-style:italic; font-size:13pt; margin-bottom:4pt;}
+    .kinhgui{ font-style:italic; margin:16pt 0 12pt; }
+    table.headtable{ width:100%; border:none; }
+    table.headtable td{ width:50%; text-align:center; vertical-align:top; border:none; font-size:13pt; }
     table.signtable{ width:100%; border:none; margin-top:40pt; }
     table.signtable td{ width:50%; text-align:center; vertical-align:top; border:none; }
     p{ margin:6pt 0; }
   </style></head>
   <body>
-    <p class="center bold underline">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</p>
-    <p class="center bold">Độc lập - Tự do - Hạnh phúc</p>
+    <p class="mauso">Mẫu số 1</p>
+    <table class="headtable"><tr>
+      <td>CÔNG AN TỈNH THÁI NGUYÊN<br><b>CÔNG AN XÃ BÌNH YÊN</b></td>
+      <td><b class="underline">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b><br><b>Độc lập - Tự do - Hạnh phúc</b></td>
+    </tr></table>
     <p class="right">${escapeHtml(diaDanh)}, ngày ${dateParts[0]} tháng ${dateParts[1]} năm ${dateParts[2]}</p>
-    <p class="title">Phiếu xác định độ mật</p>
+    <p class="title">PHIẾU TRÌNH DUYỆT<br>VÀ XÁC ĐỊNH ĐỘ MẬT CỦA VĂN BẢN</p>
+    <p class="kinhgui">Kính gửi: Lãnh đạo Công an xã Bình Yên</p>
     <p><b>1. Tên văn bản:</b> ${escapeHtml(form.tenVanBan||'')}</p>
     <p><b>2. Cơ quan xác định:</b> ${escapeHtml(form.coQuan||'')}</p>
     <p><b>3. Tên người đề xuất:</b> ${escapeHtml(form.nguoiDeXuat||'')}</p>
