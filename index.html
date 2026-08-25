@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Phiếu xác định độ mật</title>
+<title>Phiếu xác định Đề xuất độ mật</title>
 <style>
   :root{
     --primary:#8b1a1a; --primary-dark:#6e1414; --ink:#1c1c1c; --line:#d8d0c8;
@@ -138,7 +138,7 @@
 
 <header class="app-header">
   <div>
-    <h1>📄 Lập Phiếu xác định độ mật</h1>
+    <h1>📄 Lập Phiếu xác định Đề xuất độ mật</h1>
     <div class="sub">Công cụ nội bộ – hoạt động hoàn toàn ngoại tuyến, không cần Internet</div>
   </div>
   <div class="toolbar">
@@ -175,12 +175,12 @@
     </div>
 
     <div class="panel">
-      <h2><span class="num">1</span> Tên văn bản</h2>
-      <input type="text" id="tenVanBan" placeholder="Nhập tên văn bản..." oninput="renderPreview()">
+      <h2><span class="num">1</span> Tên gọi, trích yếu nội dung văn bản</h2>
+      <input type="text" id="tenVanBan" placeholder="Nhập Tên gọi, trích yếu nội dung văn bản..." oninput="renderPreview()">
     </div>
 
     <div class="panel">
-      <h2><span class="num">2</span> Cơ quan xác định</h2>
+      <h2><span class="num">2</span> Đơn vị chủ trì xây dựng văn bản</h2>
       <div class="searchbox">
         <input type="text" id="coQuanInput" placeholder="Tìm hoặc nhập cơ quan..." autocomplete="off"
           oninput="showDropdown('coQuan')" onfocus="showDropdown('coQuan')">
@@ -193,9 +193,9 @@
     </div>
 
     <div class="panel">
-      <h2><span class="num">3</span> Tên người đề xuất</h2>
+      <h2><span class="num">3</span> Họ tên cán bộ soạn thảo văn bản</h2>
       <div class="searchbox">
-        <input type="text" id="deXuatInput" placeholder="Tìm hoặc nhập tên người đề xuất..." autocomplete="off"
+        <input type="text" id="deXuatInput" placeholder="Tìm hoặc nhập Họ tên cán bộ soạn thảo văn bản..." autocomplete="off"
           oninput="showDropdown('deXuat')" onfocus="showDropdown('deXuat')">
         <div class="dropdown" id="deXuatDropdown" style="display:none;"></div>
       </div>
@@ -206,7 +206,7 @@
     </div>
 
     <div class="panel">
-      <h2><span class="num">4</span> Độ mật</h2>
+      <h2><span class="num">4</span> Đề xuất độ mật</h2>
       <div class="radio-group">
         <label><input type="radio" name="doMat" value="MẬT" onchange="onDoMatChange()"> MẬT (10 năm)</label>
         <label><input type="radio" name="doMat" value="TỐI MẬT" onchange="onDoMatChange()"> TỐI MẬT (20 năm)</label>
@@ -214,7 +214,7 @@
     </div>
 
     <div class="panel">
-      <h2><span class="num">5</span> Căn cứ xác định <span style="font-weight:400;font-size:11.5px;color:var(--muted)">(chỉ chọn đúng 1 khoản/điểm)</span></h2>
+      <h2><span class="num">5</span> Căn cứ đề xuất độ mật <span style="font-weight:400;font-size:11.5px;color:var(--muted)">(chỉ chọn đúng 1 khoản/điểm)</span></h2>
       <div class="tabs" id="dieuTabs"></div>
       <input type="text" class="khoan-search" id="canCuSearch" placeholder="🔍 Tìm nội dung khoản/điểm..." oninput="renderCanCuList()">
       <div class="khoan-list" id="khoanList"></div>
@@ -222,8 +222,8 @@
     </div>
 
     <div class="panel">
-      <h2><span class="num">6</span> Thời hạn bảo vệ</h2>
-      <div class="field-static" id="thoiHanBox">Chọn độ mật để tự động tính thời hạn.</div>
+      <h2><span class="num">6</span> Thời hạn bảo vệ bí mật nhà nước</h2>
+      <div class="field-static" id="thoiHanBox">Chọn Đề xuất độ mật để tự động tính thời hạn.</div>
       <div class="hint">Tự động tính = ngày lập phiếu + (10 năm nếu MẬT / 20 năm nếu TỐI MẬT). Không sửa thủ công.</div>
     </div>
 
@@ -240,7 +240,7 @@
     </div>
 
     <div class="panel">
-      <h2><span class="num">8</span> Số bản</h2>
+      <h2><span class="num">8</span> Số lượng bản phát hành</h2>
       <input type="number" id="soBan" min="1" value="1" oninput="renderPreview()" style="max-width:140px;">
     </div>
 
@@ -421,7 +421,7 @@ function addToList(listName, inputId){
   renderPreview();
 }
 
-/* ============================ ĐỘ MẬT / THỜI HẠN ============================ */
+/* ============================ Đề xuất độ mật / THỜI HẠN ============================ */
 function onDoMatChange(){
   const val = document.querySelector('input[name=doMat]:checked')?.value || "";
   form.doMat = val;
@@ -443,7 +443,7 @@ function computeThoiHan(){
   return addYears(form.ngayLap, years);
 }
 
-/* ============================ CĂN CỨ XÁC ĐỊNH ============================ */
+/* ============================ Căn cứ đề xuất độ mật ============================ */
 function renderDieuTabs(){
   const wrap = document.getElementById('dieuTabs');
   wrap.innerHTML = Object.keys(state.canCu).map(id => {
@@ -523,7 +523,7 @@ function renderPreview(){
   if(thoiHan){
     thoiHanBox.innerHTML = `Bảo vệ đến hết ngày <b>${fmtDateVN(thoiHan)}</b> (${form.doMat==='MẬT'?'10':'20'} năm kể từ ngày lập phiếu ${fmtDateVN(form.ngayLap)})`;
   } else {
-    thoiHanBox.textContent = 'Chọn độ mật để tự động tính thời hạn.';
+    thoiHanBox.textContent = 'Chọn Đề xuất độ mật để tự động tính thời hạn.';
   }
   renderCanCuSelectedBox();
 
@@ -544,17 +544,17 @@ function renderPreview(){
     </div>
     <div class="doc-place">${diaDanh ? escapeHtml(diaDanh) : '.....................'}, ngày ${form.ngayLap?fmtDateVN(form.ngayLap).split('/')[0]:'…'} tháng ${form.ngayLap?fmtDateVN(form.ngayLap).split('/')[1]:'…'} năm ${form.ngayLap?fmtDateVN(form.ngayLap).split('/')[2]:'…'}</div>
 
-    <div class="doc-title">PHIẾU TRÌNH DUYỆT<br>VÀ XÁC ĐỊNH ĐỘ MẬT CỦA VĂN BẢN</div>
+    <div class="doc-title">PHIẾU TRÌNH DUYỆT<br>VÀ XÁC ĐỊNH Đề xuất độ mật CỦA VĂN BẢN</div>
     <div class="doc-kinhgui">Kính gửi: Lãnh đạo Công an xã Bình Yên</div>
 
-    <div class="doc-field"><b>1. Tên văn bản:</b> ${form.tenVanBan ? escapeHtml(form.tenVanBan) : '<span class="empty-note">(chưa nhập)</span>'}</div>
-    <div class="doc-field"><b>2. Cơ quan xác định:</b> ${form.coQuan ? escapeHtml(form.coQuan) : '<span class="empty-note">(chưa chọn)</span>'}</div>
-    <div class="doc-field"><b>3. Tên người đề xuất:</b> ${form.nguoiDeXuat ? escapeHtml(form.nguoiDeXuat) : '<span class="empty-note">(chưa chọn)</span>'}</div>
-    <div class="doc-field"><b>4. Độ mật:</b> ${form.doMat ? escapeHtml(form.doMat) : '<span class="empty-note">(chưa chọn)</span>'}</div>
-    <div class="doc-field"><b>5. Căn cứ xác định:</b> ${canCuText ? ('Căn cứ ' + escapeHtml(canCuText)) : '<span class="empty-note">(chưa chọn)</span>'}</div>
-    <div class="doc-field"><b>6. Thời hạn bảo vệ:</b> ${thoiHan ? fmtDateVN(thoiHan) : '<span class="empty-note">(tự động tính sau khi chọn độ mật)</span>'}</div>
+    <div class="doc-field"><b>1. Tên gọi, trích yếu nội dung văn bản:</b> ${form.tenVanBan ? escapeHtml(form.tenVanBan) : '<span class="empty-note">(chưa nhập)</span>'}</div>
+    <div class="doc-field"><b>2. Đơn vị chủ trì xây dựng văn bản:</b> ${form.coQuan ? escapeHtml(form.coQuan) : '<span class="empty-note">(chưa chọn)</span>'}</div>
+    <div class="doc-field"><b>3. Họ tên cán bộ soạn thảo văn bản:</b> ${form.nguoiDeXuat ? escapeHtml(form.nguoiDeXuat) : '<span class="empty-note">(chưa chọn)</span>'}</div>
+    <div class="doc-field"><b>4. Đề xuất độ mật:</b> ${form.doMat ? escapeHtml(form.doMat) : '<span class="empty-note">(chưa chọn)</span>'}</div>
+    <div class="doc-field"><b>5. Căn cứ đề xuất độ mật:</b> ${canCuText ? ('Căn cứ ' + escapeHtml(canCuText)) : '<span class="empty-note">(chưa chọn)</span>'}</div>
+    <div class="doc-field"><b>6. Thời hạn bảo vệ bí mật nhà nước:</b> ${thoiHan ? fmtDateVN(thoiHan) : '<span class="empty-note">(tự động tính sau khi chọn Đề xuất độ mật)</span>'}</div>
     <div class="doc-field"><b>7. Nơi nhận:</b> ${form.noiNhanChon.length ? escapeHtml(form.noiNhanChon.join('; ')) : '<span class="empty-note">(chưa chọn)</span>'}</div>
-    <div class="doc-field"><b>8. Số bản:</b> ${document.getElementById('soBan') ? escapeHtml(document.getElementById('soBan').value||'') : ''}</div>
+    <div class="doc-field"><b>8. Số lượng bản phát hành:</b> ${document.getElementById('soBan') ? escapeHtml(document.getElementById('soBan').value||'') : ''}</div>
 
     <div class="doc-sign">
       <div class="col">
@@ -582,18 +582,18 @@ function copyPreviewText(){
     `${diaDanh}, ngày ${form.ngayLap?fmtDateVN(form.ngayLap).split('/')[0]:'…'} tháng ${form.ngayLap?fmtDateVN(form.ngayLap).split('/')[1]:'…'} năm ${form.ngayLap?fmtDateVN(form.ngayLap).split('/')[2]:'…'}`,
     "",
     "PHIẾU TRÌNH DUYỆT",
-    "VÀ XÁC ĐỊNH ĐỘ MẬT CỦA VĂN BẢN",
+    "VÀ XÁC ĐỊNH Đề xuất độ mật CỦA VĂN BẢN",
     "",
     "Kính gửi: Lãnh đạo Công an xã Bình Yên",
     "",
-    `1. Tên văn bản: ${form.tenVanBan||''}`,
-    `2. Cơ quan xác định: ${form.coQuan||''}`,
-    `3. Tên người đề xuất: ${form.nguoiDeXuat||''}`,
-    `4. Độ mật: ${form.doMat||''}`,
-    `5. Căn cứ xác định: ${buildCanCuText() ? 'Căn cứ '+buildCanCuText() : ''}`,
-    `6. Thời hạn bảo vệ: ${thoiHan?fmtDateVN(thoiHan):''}`,
+    `1. Tên gọi, trích yếu nội dung văn bản: ${form.tenVanBan||''}`,
+    `2. Đơn vị chủ trì xây dựng văn bản: ${form.coQuan||''}`,
+    `3. Họ tên cán bộ soạn thảo văn bản: ${form.nguoiDeXuat||''}`,
+    `4. Đề xuất độ mật: ${form.doMat||''}`,
+    `5. Căn cứ đề xuất độ mật: ${buildCanCuText() ? 'Căn cứ '+buildCanCuText() : ''}`,
+    `6. Thời hạn bảo vệ bí mật nhà nước: ${thoiHan?fmtDateVN(thoiHan):''}`,
     `7. Nơi nhận: ${form.noiNhanChon.join('; ')}`,
-    `8. Số bản: ${document.getElementById('soBan').value||''}`,
+    `8. Số lượng bản phát hành: ${document.getElementById('soBan').value||''}`,
     "",
     `Người phê duyệt: ${form.nguoiPheDuyet||''}`,
     `Người đề xuất: ${form.nguoiDeXuat||''}`,
@@ -636,16 +636,16 @@ function exportWord(){
       <td><b class="underline">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b><br><b>Độc lập - Tự do - Hạnh phúc</b></td>
     </tr></table>
     <p class="right">${escapeHtml(diaDanh)}, ngày ${dateParts[0]} tháng ${dateParts[1]} năm ${dateParts[2]}</p>
-    <p class="title">PHIẾU TRÌNH DUYỆT<br>VÀ XÁC ĐỊNH ĐỘ MẬT CỦA VĂN BẢN</p>
+    <p class="title">PHIẾU TRÌNH DUYỆT<br>VÀ XÁC ĐỊNH Đề xuất độ mật CỦA VĂN BẢN</p>
     <p class="kinhgui">Kính gửi: Lãnh đạo Công an xã Bình Yên</p>
-    <p><b>1. Tên văn bản:</b> ${escapeHtml(form.tenVanBan||'')}</p>
-    <p><b>2. Cơ quan xác định:</b> ${escapeHtml(form.coQuan||'')}</p>
-    <p><b>3. Tên người đề xuất:</b> ${escapeHtml(form.nguoiDeXuat||'')}</p>
-    <p><b>4. Độ mật:</b> ${escapeHtml(form.doMat||'')}</p>
-    <p><b>5. Căn cứ xác định:</b> ${canCuText ? 'Căn cứ ' + escapeHtml(canCuText) : ''}</p>
-    <p><b>6. Thời hạn bảo vệ:</b> ${thoiHan ? fmtDateVN(thoiHan) : ''}</p>
+    <p><b>1. Tên gọi, trích yếu nội dung văn bản:</b> ${escapeHtml(form.tenVanBan||'')}</p>
+    <p><b>2. Đơn vị chủ trì xây dựng văn bản:</b> ${escapeHtml(form.coQuan||'')}</p>
+    <p><b>3. Họ tên cán bộ soạn thảo văn bản:</b> ${escapeHtml(form.nguoiDeXuat||'')}</p>
+    <p><b>4. Đề xuất độ mật:</b> ${escapeHtml(form.doMat||'')}</p>
+    <p><b>5. Căn cứ đề xuất độ mật:</b> ${canCuText ? 'Căn cứ ' + escapeHtml(canCuText) : ''}</p>
+    <p><b>6. Thời hạn bảo vệ bí mật nhà nước:</b> ${thoiHan ? fmtDateVN(thoiHan) : ''}</p>
     <p><b>7. Nơi nhận:</b> ${escapeHtml(form.noiNhanChon.join('; '))}</p>
-    <p><b>8. Số bản:</b> ${escapeHtml(document.getElementById('soBan').value||'')}</p>
+    <p><b>8. Số lượng bản phát hành:</b> ${escapeHtml(document.getElementById('soBan').value||'')}</p>
     <table class="signtable"><tr>
       <td><b>NGƯỜI PHÊ DUYỆT</b><br><br><br><br>${escapeHtml(form.nguoiPheDuyet||'')}</td>
       <td><b>NGƯỜI ĐỀ XUẤT</b><br><br><br><br>${escapeHtml(form.nguoiDeXuat||'')}</td>
@@ -673,7 +673,7 @@ function switchSettingsTab(tab){
   document.querySelectorAll('#settingsTabs .tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab===tab));
   const body = document.getElementById('settingsBody');
   if(tab==='canCu') body.innerHTML = renderCanCuEditor();
-  if(tab==='coQuan') body.innerHTML = renderSimpleListEditor('coQuanList','Danh mục Cơ quan xác định');
+  if(tab==='coQuan') body.innerHTML = renderSimpleListEditor('coQuanList','Danh mục Đơn vị chủ trì xây dựng văn bản');
   if(tab==='nguoi') body.innerHTML = renderSimpleListEditor('nguoiDeXuatList','Danh mục Người đề xuất') + renderSimpleListEditor('nguoiPheDuyetList','Danh mục Người phê duyệt');
   if(tab==='noiNhan') body.innerHTML = renderSimpleListEditor('noiNhanList','Danh mục Nơi nhận thường dùng');
 }
